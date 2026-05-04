@@ -19,9 +19,12 @@ modules:
 
   - type: dnf
     repos:
+      cleanup: true
       copr:
         - atim/starship
+        - lihaohong/yazi
     install:
+      skip-unavailable: true
       packages:
         #config
         - stow
