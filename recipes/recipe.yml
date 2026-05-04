@@ -6,8 +6,8 @@ name: mangos
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+base-image: ghcr.io/ublue-os/base-main
+image-version: 44 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -23,8 +23,52 @@ modules:
         - atim/starship
     install:
       packages:
-        - micro
+        #config
+        - stow
+
+        # WM / session
+        - mangowm
+        - waybar
+        - rofi
+        - foot
+        - gtkgreet
+        - gtklock
+        - polkit
+        - xfce-polkit
+        - mako
+        - wl-clipboard
+        - swaybg
+
+	# File management
+        - thunar
+        - thunar-archive-plugin
+        - thunar-volman
+        - file-roller
+
+	# CLI essentials
+        - tmux
+        - zsh
         - starship
+        - neovim
+        - yazi
+        - git
+        - curl
+        - wget
+        - ripgrep
+        - fd-find
+        - bat
+        - fzf
+        - eza
+
+	# Useful desktop helpers
+        - pavucontrol
+        - playerctl
+        - network-manager-applet
+        - blueman-applet
+
+	# Printing
+        - cups
+
     remove:
       packages:
         # example: removing firefox (in favor of the flatpak)
@@ -39,7 +83,13 @@ modules:
         # If no repo information is specified, Flathub will be used by default
         install: # system flatpaks we want all users to have and not remove
           - org.mozilla.firefox
+          - org.onlyoffice.desktopeditors
+          - org.localsend.localsend_app
           - org.gnome.Loupe
       - scope: user # Also add Flathub user repo, but no user packages
+
+  - type: brew
+    - nofile-limits: true
+    - brew-analytics: false
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
