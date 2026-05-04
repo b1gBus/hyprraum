@@ -28,6 +28,13 @@ modules:
 
         # WM / session
         - mangowm
+        # environment
+        - qt5-qtwayland
+        - qt6-qtwayland
+        - wl-clipboard
+        - xdg-desktop-portal-wlr
+        - xdg-desktop-portal-gtk
+        - xorg-x11-server-Xwayland
         - waybar
         - rofi
         - foot
@@ -38,12 +45,18 @@ modules:
         - mako
         - wl-clipboard
         - swaybg
+        - gnome-keyring
+
+        # screenshot
+        - slurp
+        - grim
 
 	# File management
         - thunar
         - thunar-archive-plugin
         - thunar-volman
         - file-roller
+        - imv
 
 	# CLI essentials
         - tmux
@@ -59,12 +72,15 @@ modules:
         - bat
         - fzf
         - eza
+        - acpi
+        - mpv
 
 	# Useful desktop helpers
         - pavucontrol
         - playerctl
         - network-manager-applet
         - blueman-applet
+
 
 	# Printing
         - cups
