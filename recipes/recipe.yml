@@ -20,6 +20,7 @@ modules:
       cleanup: true
     install:
       install-weak-deps: false
+      skip-unavailable: true
       packages:
         #config
         - stow
