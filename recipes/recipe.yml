@@ -1,9 +1,9 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/<user>/<name>
-name: mangos
+name: magic-mango
 # description will be included in the image's metadata
-description: This is my personal OS image.
+description: This is my opinionated OS image based on MangoWM
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/base-main
@@ -12,25 +12,26 @@ image-version: 44 # latest is also supported if you want new updates ASAP
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
-  - type: files
-    files:
-      - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
-
   - type: dnf
     repos:
-      cleanup: true
       copr:
-        - atim/starship
         - lihaohong/yazi
+        - solopasha/hyprland
+      cleanup: true
     install:
-      skip-unavailable: true
+      install-weak-deps: false
       packages:
         #config
         - stow
 
         # WM / session
-        - mangowm
+        - hyprland
+        - waybar
+        - xdg-desktop-portal-hyprland
+        - hyprpaper
+        - hyprlock
+        - hypridle
+        - hyprland-qtutils
         # environment
         - qt5-qtwayland
         - qt6-qtwayland
@@ -81,9 +82,11 @@ modules:
 
         # Useful desktop helpers
         - pavucontrol
+        - brightnessctl
         - playerctl
         - network-manager-applet
         - blueman-applet
+        - xdg-user-dirs
 
         # Printing
         - cups
@@ -110,5 +113,16 @@ modules:
   - type: brew
     nofile-limits: true
     brew-analytics: false
-
+  - type: script
+    snippets:
+      - "systemctl enable greetd.service"
+      - "systemctl set-default graphical.target"
+    scripts:
+      - "install-jetbrainsmono-nerdfont.sh"
+  - type: files
+    files:
+    - source: system/usr  # copies `files/system/*` (* means everything inside it) into your image's root folder `/`
+      destination: /usr
+    - source: system/etc  # copies `files/system/*` (* means everything inside it) into your image's root folder `/`
+      destination: /etc
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
