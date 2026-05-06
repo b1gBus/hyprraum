@@ -7,7 +7,7 @@ set -oue pipefail
 
 DOWNLOAD_PATH="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip"
 FILE_NAME=$(basename ${DOWNLOAD_PATH})
-TARGET_PATH="/usr/share/fonts/$(basename ${FILE_NAME} .zip)"
+TARGET_PATH="/usr/share/fonts"
 PWD=$(pwd)
 
 # Your code goes here.
@@ -19,7 +19,7 @@ curl -OL $DOWNLOAD_PATH
 
 if [ -d "$TARGET_PATH" ]; then
   echo "Extracting $FILE_NAME"
-  unzip $FILE_NAME -d $TARGET_PATH
+  unzip $FILE_NAME -d $TARGET_PATH/$(basename ${FILE_NAME} .zip)
   echo "Done. Cleaning up."
   fc-cache -r
   rm $FILE_NAME

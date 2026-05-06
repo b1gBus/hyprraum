@@ -42,6 +42,7 @@ modules:
         - xorg-x11-server-Xwayland
         - waybar
         - rofi
+        - fuzzel
         - foot
         - cage
         - gtkgreet
@@ -120,6 +121,7 @@ modules:
       - "systemctl set-default graphical.target"
     scripts:
       - "install-jetbrainsmono-nerdfont.sh"
+      - "install-bibata-modern-ice.sh"
   - type: files
     files:
     - source: system/usr  # copies `files/system/*` (* means everything inside it) into your image's root folder `/`
