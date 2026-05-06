@@ -5,9 +5,9 @@
 # builds actually ran successfully without any errors!
 set -oue pipefail
 
-DOWNLOAD_PATH="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip"
+DOWNLOAD_PATH="https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Modern-Classic.tar.xz"
 FILE_NAME=$(basename ${DOWNLOAD_PATH})
-TARGET_PATH="/usr/share/fonts/$(basename ${FILE_NAME} .zip)"
+TARGET_PATH="/usr/share/icons"
 PWD=$(pwd)
 
 # Your code goes here.
@@ -19,8 +19,7 @@ curl -OL $DOWNLOAD_PATH
 
 if [ -d "$TARGET_PATH" ]; then
   echo "Extracting $FILE_NAME"
-  unzip $FILE_NAME -d $TARGET_PATH
+  tar -C $TARGET_PATH -xf $FILE_NAME
   echo "Done. Cleaning up."
-  fc-cache -r
   rm $FILE_NAME
 fi

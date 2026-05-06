@@ -32,7 +32,7 @@ modules:
         - hyprpaper
         - hyprlock
         - hypridle
-        - hyprland-qtutils
+        - hyprland-guiutils
         # environment
         - qt5-qtwayland
         - qt6-qtwayland
@@ -47,7 +47,7 @@ modules:
         - gtkgreet
         - gtklock
         - polkit
-        - xfce-polkit
+        - hyprpolkitagent
         - mako
         - wl-clipboard
         - swaybg
@@ -90,14 +90,14 @@ modules:
         - xdg-user-dirs
 
         # Printing
-        - cups
-
+        - cups        
     remove:
       packages:
         # example: removing firefox (in favor of the flatpak)
         # "firefox" is the main package, "firefox-langpacks" is a dependency
         - firefox
         - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+        - nano
 
   - type: default-flatpaks
     configurations:
