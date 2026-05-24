@@ -14,7 +14,7 @@ stages:
       snippets:
           - apt-get update && apt-get install -y git
           - git clone https://github.com/kuokuo123/otter-launcher
-          - cd /otter-launcher
+          - cd /otter-launcher && ls -Al
           - cargo build --release
           - cd target/release
           - mkdir -p /out/ && mv otter-launcher /out/
