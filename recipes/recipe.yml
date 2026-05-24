@@ -13,7 +13,7 @@ stages:
     - type: script
       snippets:
           - apt-get update && apt-get install -y git
-          - git clone https://github.com/kuokuo123/otter-launcher /otter-launcher
+          - git clone https://github.com/kuokuo123/otter-launcher
           - cd /otter-launcher
           - cargo build --release
           - cd target/release
