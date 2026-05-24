@@ -12,13 +12,13 @@ stages:
     modules:
     - type: script
       snippets:
-          - apt-get update && apt-get install -y git
+          - apt-get update && apt-get install -y git pkg-config libgtk-3-dev libadwaita-1-dev
           - git clone https://github.com/kuokuo123/otter-launcher
-          - cd /otter-launcher && ls -Al
+          - cd /otter-launcher
+          - cargo generate-lockfile
           - cargo build --release
-          - cd target/release
-          - mkdir -p /out/ && mv otter-launcher /out/
-
+          - mkdir -p /out/
+          - cp target/release/otter-launcher /out/
 modules:
   - type: copy
     from: otter-launcher
