@@ -8,8 +8,8 @@ description: This is my opinionated OS image based on Hyprland
 
 stages:
   - name: otter-launcher
-  - from: docker.io/library/rust
-  - modules:
+    from: docker.io/library/rust
+    modules:
     - type: script
       snippets:
           - apt-get update && apt-get install -y git
