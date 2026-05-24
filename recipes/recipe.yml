@@ -8,7 +8,7 @@ description: This is my opinionated OS image based on Hyprland
 
 stages:
   - name: otter-launcher
-  - from: docker.io/library/golang 
+  - from: docker.io/library/rust
   - modules:
     - type: script
       snippets:
