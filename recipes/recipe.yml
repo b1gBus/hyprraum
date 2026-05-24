@@ -2,19 +2,32 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/<user>/<name>
 name: hyprraum
-# description will be included in the image's metadata
+base-image: ghcr.io/ublue-os/base-main
+image-version: 44
 description: This is my opinionated OS image based on Hyprland
 
-# the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/base-main
-image-version: 44 # latest is also supported if you want new updates ASAP
+stages:
+  - name: otter-launcher
+  - from: docker.io/library/golang 
+  - modules:
+    - type: script
+      snippets:
+          - apt-get update && apt-get install -y git
+          - git clone https://github.com/kuokuo123/otter-launcher /otter-launcher
+          - cd /otter-launcher
+          - cargo build --release
+          - cd target/release
+          - mkdir -p /out/ && mv otter-launcher /out/
 
-# module configuration, executed in order
-# you can include multiple instances of the same module
 modules:
+  - type: copy
+    from: otter-launcher
+    src: /out/otter-launcher
+    dest: /usr/bin/
   - type: dnf
     repos:
       copr:
+        - atim/starship
         - lihaohong/yazi
         - lionheartp/Hyprland
       cleanup: true
@@ -33,6 +46,7 @@ modules:
         - hyprlock
         - hypridle
         - hyprland-guiutils
+        - papirus-icon-theme
         # environment
         - qt5-qtwayland
         - qt6-qtwayland
@@ -41,15 +55,13 @@ modules:
         - xdg-desktop-portal-gtk
         - xorg-x11-server-Xwayland
         - waybar
-        - rofi
         - fuzzel
         - foot
-        - cage
-        - gtkgreet
+        - tuigreet
         - gtklock
         - polkit
         - hyprpolkitagent
-        - mako
+        - dunst
         - wl-clipboard
         - swaybg
         - gnome-keyring
@@ -57,6 +69,7 @@ modules:
         # screenshot
         - slurp
         - grim
+        - swappy
 
         # File management
         - thunar
@@ -106,7 +119,8 @@ modules:
         scope: system
         # If no repo information is specified, Flathub will be used by default
         install: # system flatpaks we want all users to have and not remove
-          - org.mozilla.firefox
+          - io.gitlab.librewolf-community
+          - org.mozilla.Thunderbird
           - org.onlyoffice.desktopeditors
           - org.localsend.localsend_app
           - org.gnome.Loupe
@@ -115,12 +129,21 @@ modules:
   - type: brew
     nofile-limits: true
     brew-analytics: false
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - FiraCode
+        - JetBrainsMono
+        - NerdFontsSymbolsOnly
+      google-fonts:
+        - Roboto
+        - Open Sans
+        - Inter
   - type: script
     snippets:
       - "systemctl enable greetd.service"
       - "systemctl set-default graphical.target"
     scripts:
-      - "install-jetbrainsmono-nerdfont.sh"
       - "install-bibata-modern-ice.sh"
   - type: files
     files:
