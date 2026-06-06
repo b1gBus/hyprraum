@@ -6,21 +6,7 @@ base-image: ghcr.io/ublue-os/base-main
 image-version: 44
 description: This is my opinionated OS image based on Hyprland
 
-stages:
-  - name: otter-launcher
-    from: docker.io/library/rust
-    modules:
-    - type: script
-      snippets:
-          - apt-get update && apt-get install -y git pkg-config libgtk-3-dev libadwaita-1-dev
-          - git clone https://github.com/kuokuo123/otter-launcher
-          - cd /otter-launcher && cargo build --release
-          - mkdir -p /out/ && cp /otter-launcher/target/release/otter-launcher /out/
 modules:
-  - type: copy
-    from: otter-launcher
-    src: /out/otter-launcher
-    dest: /usr/bin/
   - type: dnf
     repos:
       copr:
@@ -54,13 +40,12 @@ modules:
         - waybar
         - fuzzel
         - foot
-        - tuigreet
+        - sddm
         - gtklock
         - polkit
         - hyprpolkitagent
         - dunst
         - wl-clipboard
-        - swaybg
         - gnome-keyring
 
         # screenshot
@@ -102,12 +87,14 @@ modules:
 
         # Printing
         - cups        
+
+        # Multimedia
+        - v4l-utils-devel-tools 
+
     remove:
       packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
         - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+        - firefox-langpacks
         - nano
 
   - type: default-flatpaks
@@ -137,9 +124,6 @@ modules:
         - Open Sans
         - Inter
   - type: script
-    snippets:
-      - "systemctl enable greetd.service"
-      - "systemctl set-default graphical.target"
     scripts:
       - "install-bibata-modern-ice.sh"
   - type: files
