@@ -79,6 +79,7 @@ modules:
 
         # Useful desktop helpers
         - pavucontrol
+        - mpv-mpris
         - brightnessctl
         - playerctl
         - network-manager-applet
@@ -90,6 +91,9 @@ modules:
 
         # Multimedia
         - v4l-utils-devel-tools 
+
+        # Emoji font
+        - twitter-twemoji-fonts 
 
     remove:
       packages:
