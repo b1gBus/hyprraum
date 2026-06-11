@@ -41,7 +41,7 @@ modules:
         - fuzzel
         - foot
         - sddm
-        - qt5-qtgraphicaleffects
+        - qt6-qt5compat-devel
         - gtklock
         - polkit
         - hyprpolkitagent
