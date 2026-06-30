@@ -90,6 +90,8 @@ modules:
         # Printing
         - cups        
         - epson-inkjet-printer-escpr2-1.2.39-1.x86_64.rpm
+        - system-config-printer
+
 
         # Multimedia
         - v4l-utils-devel-tools 
