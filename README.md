@@ -9,6 +9,10 @@
 ```
 
 # hyprraum &nbsp; [![bluebuild build badge](https://github.com/b1gbus/mangos/actions/workflows/build.yml/badge.svg)](https://github.com/b1gbus/mangos/actions/workflows/build.yml)
+This is a highly opinionated custom build based on Hyprland on a immutable version of Fedora:
+
+<img width="1920" height="1080" alt="swappy-20260819_231729" src="https://github.com/user-attachments/assets/2cd2cdfa-75f7-4dbc-9e8e-ed9a91ce721e" />
+
 
 See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
 
