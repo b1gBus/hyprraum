@@ -131,6 +131,8 @@ modules:
         - Roboto
         - Open Sans
         - Inter
+        - Noto Color Emoji
+        - Noto Emoji
   - type: script
     scripts:
       - "install-bibata-modern-ice.sh"
