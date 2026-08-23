@@ -23,7 +23,7 @@ modules:
 
         # WM / session
         - hyprland
-        - waybar
+        - quickshell
         - xdg-desktop-portal-hyprland
         - hyprpaper
         - hyprlock
